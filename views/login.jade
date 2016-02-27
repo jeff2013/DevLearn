@@ -1,0 +1,30 @@
+//
+   Created by jeffchang on 2016-02-27,
+    //extends layout takes the stuff in the header of the layout.jade file and applies it to the current jade file
+    //extends layout
+doctype html
+html(lang="en")
+head
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js")
+block content
+    h1= title
+    p Welcome to #{title}
+    body
+        div.container
+            .row
+                p this is row 1
+            .row
+                p this is row 2
+            .row
+                form(action="/login", method = "post")
+                    div.form-group
+                        h3(style="text-align: center;").
+                            Login
+                    div.form-group
+                        input(class="form-control", name="username" placeholder="Username", type="text")
+                        input(class="form-control", name="password" placeholder="Password", type="password")
+                    div.form-group
+                        button.btn.btn-lg.btn-primary.btn-block(class="btn btn-sm btn-primary", type="submit").
+                            Login
+
