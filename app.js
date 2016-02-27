@@ -34,25 +34,25 @@ app.use('/', routes);
 app.use('/login', login);
 
 var models = require('./models');
-models.sequelize.sync().then(function () {
-  console.log('Sequelize initialized!');
-  startPassport();
-});
-
-passport.serializeUser(function (username, done) {
-  done(null, username);
-});
-passport.deserializeUser(function (username, done) {
-  var query = {
-    "where": { "username": username },
-    "attributes": ['username', 'password']
-  };
-  var deserialize = function (user) {
-    var username = user.dataValues.username;
-    done(null, username);
-  };
-  models.User.findOne(query).then(deserialize);
-});
+//models.sequelize.sync().then(function () {
+//  console.log('Sequelize initialized!');
+//  startPassport();
+//});
+//
+//passport.serializeUser(function (username, done) {
+//  done(null, username);
+//});
+//passport.deserializeUser(function (username, done) {
+//  var query = {
+//    "where": { "username": username },
+//    "attributes": ['username', 'password']
+//  };
+//  var deserialize = function (user) {
+//    var username = user.dataValues.username;
+//    done(null, username);
+//  };
+//  models.User.findOne(query).then(deserialize);
+//});
 
 
 
