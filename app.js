@@ -1,13 +1,9 @@
-var express = require('express');
 var path = require('path');
 var fs = require('fs');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
 
 var routes = require('./routes/index');
 var login = require('./routes/login');
@@ -39,8 +35,26 @@ app.use('/login', login);
 
 var models = require('./models');
 models.sequelize.sync().then(function () {
-  console.log('Sequelize initialized!')
+  console.log('Sequelize initialized!');
+  startPassport();
 });
+
+passport.serializeUser(function (username, done) {
+  done(null, username);
+});
+passport.deserializeUser(function (username, done) {
+  var query = {
+    "where": { "username": username },
+    "attributes": ['username', 'password']
+  };
+  var deserialize = function (user) {
+    var username = user.dataValues.username;
+    done(null, username);
+  };
+  models.User.findOne(query).then(deserialize);
+});
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -73,6 +87,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
+
+
 var startPassport = function(){
   passport.use(new LocalStrategy(function (username, password, done){
     var query = {
@@ -93,6 +109,7 @@ var startPassport = function(){
       });
 
     };
+    models.User.findOne(query).then(validate);
   }));
 }
 
