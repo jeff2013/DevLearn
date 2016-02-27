@@ -6,7 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var login = require('./routes/login');
+var express = require('express');
+var busboy = require('connect-busboy');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var bcrypt = require('bcryptjs');
 
 var app = express();
 
@@ -21,9 +26,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(busboy());
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/login', login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -55,6 +63,29 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+var startPassport = function(){
+  passport.use(new LocalStrategy(function (username, password, done){
+    var query = {
+      "where": {"username": username},
+      "attributes": ['username', 'password']
+    };
+    var validate = function(user){
+      var account = user.dataValues;
+      if(!account) {
+        done(null, false, {message: 'Unknown user'});
+      }
+      bcrypt.compare(password, account.password, function(err, res){
+        if(res){
+          done(null, account.username);
+        }else{
+          done(null, false, {message: "Invalid Password"});
+        }
+      });
+
+    };
+  }));
+}
 
 
 module.exports = app;
