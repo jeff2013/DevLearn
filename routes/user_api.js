@@ -24,7 +24,9 @@ router.post('/new_user', function(req, res){
             'password': hash,
             'email': body.email
         }
-    }).then(function(user, created) {
+    }).then(function(result) {
+        var user = result[0];
+        var created = result[1];
         if(created) {
             res.json({'result': user.dataValues});
         } else {

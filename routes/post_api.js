@@ -18,44 +18,52 @@ router.get('/:post_id', function (req, res) {
 
 router.post('/new_post', function(req, res) {
     var body = req.body;
-    if(req.isAuthenticated()) {
-        // Find the user details
-        Model.User.findOne({
-            where: { username: req.user.username}
-        }).then(function(user) {
-           return user.addPost({
-               where: {
-                   title: body.title,
-                   type: body.type,
-                   content: body.content,
-                   popularity: 0,
-                   image_url: body.image_url
-               }
-           })
-        }).then(function(post) {
-            return Promise.all([Promise.resolve(post)]
-                .concat(
-                    body.tags.map(function (tag) {
-                        return Model.Tag.findOrCreate({
-                            where: {
-                                title: tag
-                            }
-                        })
-                    })
-                )
-            )
-        }).then(function(tags) {
-            var post = tags.unshift()
-            return post.setTags(tags)
+    // Find the user details
+    Model.User.findOne({
+        where: { id: body.user_id}
+    }).then(function(user) {
+        console.log("USER: "+ Object.keys(user));
+        var new_post = Model.Post.build({
+            title: body.title,
+            type: body.type,
+            content: body.content,
+            popularity: 0,
+            image_url: body.image_url
+        })
+        return new_post.save().then(function(post){
+            return user.addPost(post)
         }).then(function(){
-            res.json({ result: post.dataValue })
-        }).catch(function(err){
-            console.error(err);
-            res.status(500).end();
-        });
-    } else {
-        res.status('403').end();
-    }
+            return new_post;
+        })
+    }).then(function(post) {
+        var output = [Promise.resolve(post)]
+            .concat(
+                body.tags.map(function (tag) {
+                    return Model.Tag.findOrCreate({
+                        where: {
+                            title: tag
+                        }
+                    }).then(function(result) {
+                        console.log("TAG:", result[0]);
+                        return result[0];
+                    });
+                })
+            )
+        console.log("PROMISE MAP: ", output)
+        return Promise.all(output);
+    }).then(function(tags) {
+        var post = tags.shift()
+        console.log("TAGS:", tags);
+        console.log("POST:", post);
+        return post.addTags(tags).then(function() {
+            return post;
+        })
+    }).then(function(post){
+        res.json({ result: post.dataValue })
+    }).catch(function(err){
+        console.error(err);
+        res.status(500).end();
+    });
 });
 
 module.exports = router;

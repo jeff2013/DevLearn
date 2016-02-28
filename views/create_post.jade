@@ -1,0 +1,26 @@
+//
+   Created by jeffchang on 2016-02-28.
+extends layout
+block content
+    ul(class="nav nav-tabs")
+        li(role="presentation")
+            a(href="/") ShitPost.org
+        li(role="presentation")
+            a(href="/login") Login
+        li(role="presentation" class="active")
+            a(href="/register") Register
+    body.fill-container
+        div.container.fill-container
+            form(action="/posts/new_post", method = "post", data-toggle="validator" role = "form", id="registration-form")
+                div.form-group
+                    h3(style="text-align: center;").
+                        Create a New Post
+                div.form-group
+                    input(class="form-control", name="title" placeholder="Title", type="text")
+            textarea.full-height(name="content", type="text", form="registration-form")
+            textarea(name="tags", type="text", form="registration-form")
+            button.btn.btn-sm.btn-block(type="submit", form ="registration-form").
+                Submit
+
+
+
