@@ -17,7 +17,7 @@ module.exports = function (sequelize, DataTypes) {
         classMethods: {
             associate: function (models) {
                 Post.belongsTo(models.User, { as: 'Post', foreignKey: 'user_id'});
-                Post.belongsToMany(models.Tags, { through : "PostTags" });
+                Post.belongsToMany(models.Tag, { through : "PostTags" });
             }
         }
     });

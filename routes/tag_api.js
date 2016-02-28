@@ -1,5 +1,5 @@
 /**
-<<<<<<< Updated upstream
+ <<<<<<< Updated upstream
  *
  * Created by reed on 2/27/16.
  */
@@ -10,7 +10,7 @@ var Model = require('../models');
 var router = express.Router();
 
 router.get('/top/:num_tags', function(req, res) {
-  Model.Tag.find({ order: '"popularity" DESC', limit: req.params.num_tags}).then( function(tags) {
+  Model.Tag.findAll({ order: '"popularity" DESC', limit: req.params.num_tags}).then( function(tags) {
     var tagJson = [];
     tags.forEach(function (obj) {
       tagJson.push(obj.dataValues);
@@ -20,14 +20,16 @@ router.get('/top/:num_tags', function(req, res) {
 });
 
 router.get('/:tag_id/top_posts/:num_posts', function(req, res) {
-  Model.Post.find({
-    where : {
-      tag_id: req.params.tag_id
-    }, order: '"popularity" DESC',
-    limit: req.params.num_posts
-  }).then(function(posts) {
-    res.json(posts.dataValues);
+  Model.Tag.find({
+    where: {id : req.params.tag_id}
+  }).then(function(tag) {
+    console.log(tag);
+    tag.getPosts().then(function(post) {
+      console.log(post);
+      res.json(post);
+    });
   });
 });
+module.exports = router;
 
 
