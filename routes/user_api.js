@@ -16,13 +16,13 @@ router.post('/new_user', function(req, res){
     var body = req.body;
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(body.password, salt);
-    Model.User.findOrCreate({
+    Models.User.findOrCreate({
         where: {
-            'username': req.params.username,
+            'username': body.username,
         },
         defaults: {
             'password': hash,
-            'email': req.params.email
+            'email': body.email
         }
     }).then(function(user, created) {
         if(created) {
