@@ -1,6 +1,6 @@
+*.log
 .idea/
 node_modules/
-credentials.json
 postgres.pub
 private.key
 public.key
