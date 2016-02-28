@@ -41,7 +41,9 @@ router.post('/new_post', function(req, res) {
     var json = req.body;
     // TODO: Dont hardcode
     // Parse our tags
-    json.tags = req.body.tags.replace(/ /g, '').split("#");
+    var tagStrings = req.body.tags.replace(/ /g, '').split("#");
+	tagStrings.shift();
+	json.tags = tagStrings;
     console.log("TAGS PARSED:", json.tags);
     if(req.isAuthenticated()) {
 		// Get the user
