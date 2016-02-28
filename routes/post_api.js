@@ -16,6 +16,7 @@ router.get('/:post_id', function (req, res) {
     })
 });
 
+
 router.post('/new_post', function(req, res) {
     var body = req.body;
     // Find the user details
