@@ -10,7 +10,7 @@ module.exports = function (sequelize, DataTypes) {
         // Content is based off of what type it is
         // IE: video would be url to video
         // Or Text would just be text, etc
-        content : DataTypes.STRING,
+        content : DataTypes.TEXT,
         popularity : DataTypes.INTEGER,
         image_url : DataTypes.STRING
     }, {
