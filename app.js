@@ -35,12 +35,8 @@ app.use(busboy());
 
 app.use('/', routes);
 app.use('/login', login);
-<<<<<<< Updated upstream
 app.use('/register', register);
 app.use('/api/users', user_api);
-=======
-app.use('/api/users', user_api)
->>>>>>> Stashed changes
 
 models.sequelize.sync().then(function () {
   console.log('Sequelize initialized!');
