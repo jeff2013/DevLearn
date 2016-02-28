@@ -84,9 +84,10 @@ function ensureSlackUser(){
 }
 
 function startSlack(){
-	ensureSlackUser().then(function(){
+	ensureSlackUser().then(function(user){
 		const botkit = require('botkit')
-
+	
+		console.log("USER: ", user.body)
 		const controller = botkit.slackbot({
 			debug: false
 		})
@@ -102,6 +103,7 @@ function startSlack(){
 				json: {
 					title: 'slack',
 					type: 0,
+					user_id: user.body.id,
 					content: message.text,
 					image_url: 'foo',
 					tags: ['slack']
