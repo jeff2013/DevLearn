@@ -2,7 +2,7 @@
  * Created by reed on 2/27/16.
  */
 module.exports = function (sequelize, DataTypes) {
-    var Post = sequelize.define('Posts', {
+    var Post = sequelize.define('Post', {
         title : DataTypes.STRING,
         // Data types are as follows
         // 0 is text, 1 is video

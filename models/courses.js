@@ -2,7 +2,7 @@
  * Created by reed on 2/27/16.
  */
 module.exports = function (sequelize, DataTypes) {
-    var Course = sequelize.define('Courses', {
+    var Course = sequelize.define('Course', {
         title : DataTypes.STRING,
     }, {
         classMethods: {

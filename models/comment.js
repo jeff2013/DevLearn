@@ -5,7 +5,7 @@
  * Created by reed on 2/27/16.
  */
 module.exports = function (sequelize, DataTypes) {
-    var Comment = sequelize.define('Comments', {
+    var Comment = sequelize.define('Comment', {
         content : DataTypes.STRING,
     }, {
         classMethods: {
