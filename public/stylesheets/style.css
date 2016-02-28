@@ -9,6 +9,12 @@ a {
 
 .center {
   text-align: center;
+  margin:auto;
+}
+
+.bord{
+    border: 5px black;
+    background-color: black;
 }
 
 .btn-register{
@@ -26,4 +32,19 @@ a {
 .btn-register:active{
     background-color:#cc7a00;
     border-color:#cc7a00;
+}
+
+.testDiv{
+    margin: 0 auto;
+    width: 50%;
+}
+
+.constraint{
+    width: 300px;
+    height: 300px;
+}
+
+.resize{
+    max-width:100%;
+    max-height: 100%;
 }

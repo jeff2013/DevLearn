@@ -9,8 +9,11 @@ var routes = require('./routes/index');
 var login = require('./routes/login');
 var user_api = require('./routes/user_api');
 var tag_api = require('./routes/tag_api');
+var post_api=require('./routes/post_api');
 var register = require('./routes/register');
 var search = require('./routes/search');
+var tag = require('./routes/tag');
+var posts=require('./routes/post');
 var express = require('express');
 var busboy = require('connect-busboy');
 var passport = require('passport');
@@ -41,6 +44,9 @@ app.use('/register', register);
 app.use('/api/users', user_api);
 app.use('/api/tags', tag_api);
 app.use('/api/search', search);
+app.use('/api/posts', post_api);
+app.use('/tags', tag);
+app.use('/posts', posts);
 
 models.sequelize.sync().then(function () {
   console.log('Sequelize initialized!');
