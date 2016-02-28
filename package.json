@@ -25,7 +25,8 @@
     "pg-hstore": "^2.3.2",
     "request": "^2.69.0",
     "sequelize": "^3.19.3",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "botkit": "0.0.7"
   },
   "devDependencies": {
     "gulp": "~3.9.1",

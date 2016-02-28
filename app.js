@@ -110,7 +110,18 @@ app.use(function(err, req, res, next) {
   });
 });
 
+const botkit = require('botkit')
 
+const controller = botkit.slackbot({
+	debug: false
+})
+controller.spawn({
+	token: 'xoxb-23439523206-qtfQBvS5NHmMOouGcrN3oNJY'
+}).startRTM()
+
+controller.on('ambient', function(bot, message){
+	console.log(message.text)
+})
 
 var startPassport = function(){
   passport.use(new LocalStrategy(function (username, password, done){
