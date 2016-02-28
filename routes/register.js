@@ -20,6 +20,7 @@ router.get('/', function(req, res){
 });
 
 router.post('/', function(req, res) {
+    console.log("Register begin!");
     request({
         uri: "http://"+req.get('host')+"/api/users/new_user",
         method: "POST",
