@@ -4,10 +4,13 @@ block content
     ul(class="nav nav-tabs")
         li(role="presentation" class="active")
             a(href="/") ShitPost.org
-        li(role="presentation")
-            a(href="/login") Login
-        li(role="presentation")
-            a(href="/register") Register
+        if loggedIn
+            //do nothing
+        else
+            li(role="presentation")
+                a(href="/login") Login
+            li(role="presentation")
+                a(href="/register") Register
     h1.center= title
     p.center Welcome to #{title}
     .container

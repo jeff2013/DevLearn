@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
 var request = require('request');
 
 /* GET home page. */
@@ -14,7 +15,8 @@ router.get('/', function(req, res, next) {
     }else{
       console.log(response.body);
       var json = JSON.parse(response.body);
-      res.render('index', { title: 'Shitpost', tags: json});
+      console.log(req.isAuthenticated());
+      res.render('index', { title: 'Shitpost', tags: json, loggedIn: req.isAuthenticated()});
     }
   })
 });
