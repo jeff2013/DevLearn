@@ -54,9 +54,71 @@ app.use('/tags', tag);
 app.use('/posts', posts);
 app.use('/api/search', search);
 
+const request = require('request')
+
+function promiseRequest(args){
+	return new Promise(function(resolve, reject){
+		request(args, function(err, res, body){
+			if(err){
+				reject(err)
+			}else{
+				resolve({res: res, body: body})
+			}
+		})
+	})
+}
+
+function ensureSlackUser(){
+	return promiseRequest({
+		url: 'http://localhost/api/users/new_user',
+		method: 'POST',
+		json: {
+			username: 'slack',
+			password: 'slack',
+			email: 'a@b.c'
+		}
+	})
+}
+
+function startSlack(){
+	ensureSlackUser().then(function(){
+		const botkit = require('botkit')
+
+		const controller = botkit.slackbot({
+			debug: false
+		})
+		controller.spawn({
+			token: 'xoxb-23439523206-qtfQBvS5NHmMOouGcrN3oNJY'
+		}).startRTM()
+
+		controller.on('ambient', function(bot, message){
+			console.log(message.text)
+			request({
+				url: 'http://localhost/api/posts/new_post',
+				method: 'POST',
+				json: {
+					title: 'slack',
+					type: 0,
+					content: message.text,
+					image_url: 'foo',
+					tags: ['slack']
+				}
+			}, function(err, res, body){
+				if(err){
+					console.error(err)
+				}
+				console.log("post_create ", body)
+			})
+		})
+	}).catch(function(err){
+		console.error(err)
+	})
+}
+
 models.sequelize.sync().then(function () {
   console.log('Sequelize initialized!');
   startPassport();
+  startSlack();
 });
 
 passport.serializeUser(function (username, done) {
@@ -106,19 +168,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-const botkit = require('botkit')
-
-const controller = botkit.slackbot({
-	debug: false
-})
-controller.spawn({
-	token: 'xoxb-23439523206-qtfQBvS5NHmMOouGcrN3oNJY'
-}).startRTM()
-
-controller.on('ambient', function(bot, message){
-	console.log(message.text)
-})
 
 var startPassport = function(){
   passport.use(new LocalStrategy(function (username, password, done){
