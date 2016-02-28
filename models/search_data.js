@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes){
 	}, {
 		classMethods: {
 			associate: function(models){
-				SearchData.belongsTo(models.Posts)
+				SearchData.belongsTo(models.Post)
 			}
 		}
 	})
