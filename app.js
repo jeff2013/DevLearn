@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var _ = require('lodash');
+
 var routes = require('./routes/index');
 var login = require('./routes/login');
 var user_api = require('./routes/user_api');
@@ -79,6 +81,10 @@ function ensureSlackUser(){
 	})
 }
 
+function getPostTitle(contents){
+	return contents.slice(0, _.min([contents.length, 20]))
+}
+
 function startSlack(){
 	ensureSlackUser().then(function(user){
 		const botkit = require('botkit')
@@ -97,9 +103,9 @@ function startSlack(){
 				url: 'http://localhost/api/posts/new_post',
 				method: 'POST',
 				json: {
-					title: 'slack',
+					title: getPostTitle(message.text),
 					type: 0,
-					user_id: user.body.id,
+					username: 'slack',
 					content: message.text,
 					image_url: 'foo',
 					tags: ['slack']

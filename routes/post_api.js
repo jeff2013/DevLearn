@@ -21,7 +21,7 @@ router.post('/new_post', function(req, res) {
     var body = req.body;
     // Find the user details
     Model.User.findOne({
-        where: { id: body.user_id}
+        where: { username: body.username }
     }).then(function(user) {
         console.log("USER: "+ Object.keys(user));
         var new_post = Model.Post.build({
