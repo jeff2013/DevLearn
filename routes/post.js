@@ -43,37 +43,29 @@ router.post('/new_post', function(req, res) {
     json.tags = req.body.tags.replace(/ /g, '').split("#");
     console.log("TAGS PARSED:", json.tags);
     if(req.isAuthenticated()) {
-        console.log("PRELIM USER:" + req.user);
-        // Find the user details
-        Model.User.findOne({
-            where: { username : req.user }
-        }).then(function(user) {
-            console.log("USER: " + user.dataValues);
-            // Get the user
-            console.log("JSON SHIT: " + json);
-            json.image_url = "placeholder";
-            json.type = 0;
-            console.log("USERDATA:" + user.dataValues);
-            json.user_id = user.dataValues.id;
-            console.log("Post begin!");
-            request({
-                uri: "http://" + req.get('host') + "/api/posts/new_post",
-                method: "POST",
-                json: json,
-                header: {
-                    "Content-Type": 'application/json'
-                }
-            }, function (error, response, body) {
-                console.log(response);
-                if (error) {
-                    console.log("Error posting:" + error);
-                    res.redirect('/');
-                } else {
-                    console.log("POST posted");
-                    res.redirect('/');
-                }
-            });
-        });
+		// Get the user
+		console.log("JSON SHIT: " + json);
+		json.image_url = "placeholder";
+		json.type = 0;
+		json.username = req.user;
+		console.log("Post begin!");
+		request({
+			uri: "http://" + req.get('host') + "/api/posts/new_post",
+			method: "POST",
+			json: json,
+			header: {
+				"Content-Type": 'application/json'
+			}
+		}, function (error, response, body) {
+			console.log(response);
+			if (error) {
+				console.log("Error posting:" + error);
+				res.redirect('/');
+			} else {
+				console.log("POST posted");
+				res.redirect('/');
+			}
+		});
     }
 });
 
