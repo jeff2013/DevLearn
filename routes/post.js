@@ -35,6 +35,7 @@ router.get('/get_post/:post_id', function(req, res, next) {
     })
 });
 
+
 router.post('/new_post', function(req, res) {
     // Build the json file
     var json = req.body;

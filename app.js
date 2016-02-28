@@ -13,7 +13,7 @@ var post_api=require('./routes/post_api');
 var register = require('./routes/register');
 var tag = require('./routes/tag');
 var posts = require('./routes/post');
-var search = require('./routes/search');
+var search_api = require('./routes/search_api');
 var express = require('express');
 var busboy = require('connect-busboy');
 var passport = require('passport');
@@ -50,7 +50,7 @@ app.use('/api/users', user_api);
 app.use('/api/tags', tag_api);
 app.use('/tags', tag);
 app.use('/posts', posts);
-app.use('/api/search', search);
+app.use('/api/search', search_api);
 app.use('/api/posts', post_api);
 
 const request = require('request')
