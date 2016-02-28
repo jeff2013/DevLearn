@@ -12,7 +12,7 @@ module.exports = function (sequelize, DataTypes) {
         // Or Text would just be text, etc
         content : DataTypes.STRING,
         popularity : DataTypes.INTEGER,
-        image_url : DataTypes.STRING
+        //image_url : DataTypes.STRING
     }, {
         classMethods: {
             associate: function (models) {
