@@ -9,22 +9,21 @@ block content
             a(href="/") Home
     body
         .container
-            h3.center Welcome to the shitty posts
-        .container
+            h3.center Learn more about #{title}
+        .postsDiv
             each post in posts
-                .constraint
+                .constraint.block
                     .card.small(style="overflow: hidden;")
                         .card-image.waves-effect.waves-block.waves-light
-                            img.activator.resize(src='https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSw46sQTFscSBN7K6CnQftAjnBq3_qv19kiHPRePB5o14R0RCfoWa7WlF0', overflow="hidden")
+                            img.activator.resize(src='https://9to5mac.files.wordpress.com/2014/08/yosemite.jpg?w=1200&h=&crop=1', overflow="hidden")
                         .card-content
                             span.card-title.activator.grey-text.text-darken-4=post.title
-                                i.material-icons.right more_vert
-                            p
-                                a(href='#') This is a link
+                                i.material-icons.right
+                                    img(src="/images/more.png")
                         .card-reveal
                             span.card-title.grey-text.text-darken-4=post.title
                                 i.material-icons.right close
-                            p=post.content
+                            p!=md(post.content)
                             .row
                                 a(href="/posts/get_post/"+post.id)
                                     button.btn.btn-sm.btn-register.btn-block(type="submit").
