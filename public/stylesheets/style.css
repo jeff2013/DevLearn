@@ -78,32 +78,13 @@ a {
     max-width: 100%;
 }
 
-.testDiv{
-    margin: 0 auto;
-    width: 50%;
+.postsDiv{
+    max-width: 75%;
+    height: auto;
+    margin-left: 50px;
 }
 
-.constraint{
-    width: 300px;
-    height: 300px;
-}
-
-.resize{
-    max-width:100%;
-    max-height: 100%;
-}
-
-.testDiv{
-    margin: 0 auto;
-    width: 100%;
-}
-
-.constraint{
-    width: 300px;
-    height: 300px;
-}
-
-.resize{
-    max-width:100%;
-    max-height: 100%;
+.block{
+    display: inline-block;
+    margin: 10px;
 }

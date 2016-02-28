@@ -12,7 +12,7 @@ var md = require('marked');
 // Code highlighting because why not lol
 md.setOptions({
     highlight: function(code) {
-        return require('highlight.js').highlighAuto(code).value;
+        return require('highlight.js').highlightAuto(code).value;
     }
 });
 
@@ -39,7 +39,9 @@ router.post('/new_post', function(req, res) {
     // Build the json file
     var json = req.body;
     // TODO: Dont hardcode
-    json.tags = ["Javascript", "BRUTAL ASSFUCKING XXXXX"];
+    // Parse our tags
+    json.tags = req.body.tags.replace(/ /g, '').split("#");
+    console.log("TAGS PARSED:", json.tags);
     if(req.isAuthenticated()) {
         console.log("PRELIM USER:" + req.user);
         // Find the user details
