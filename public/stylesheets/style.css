@@ -1,8 +1,29 @@
 body {
-  padding: 50px;
+  padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.center {
+  text-align: center;
+}
+
+.btn-register{
+    color: #fff;
+    background-color: #ff9900;
+    border-color:#ff9900;
+}
+
+.btn-register:hover{
+    background-color: #e68a00;
+    border-color: #e68a00;
+
+}
+
+.btn-register:active{
+    background-color:#cc7a00;
+    border-color:#cc7a00;
 }

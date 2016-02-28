@@ -1,16 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  div
-    p Hello World
-    p hi
-  div
-    p bro
-    form(action='./login')
-      input(type='submit', value='Login')
-    form(action='./register')
-      input(type='submit', value='Register')
-
-
+    ul(class="nav nav-tabs")
+        li(role="presentation" class="active")
+            a(href="/") ShitPost.org
+        li(role="presentation")
+            a(href="/login") Login
+        li(role="presentation")
+            a(href="/register") Register
+    h1.center= title
+    p.center Welcome to #{title}

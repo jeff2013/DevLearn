@@ -10,7 +10,7 @@ var Model = require('../models');
 var router = express.Router();
 
 router.get('/top/:num_tags', function(req, res) {
-  Model.Tag.find({ order: '"popularity" DESC', limit: req.params.num_tags}).then( function(tags) {
+  Model.Tag.findAll({ order: '"popularity" DESC', limit: req.params.num_tags}).then( function(tags) {
     var tagJson = [];
     tags.forEach(function (obj) {
       tagJson.push(obj.dataValues);
@@ -32,5 +32,6 @@ router.get('/:tag_id/top_posts/:num_posts', function(req, res) {
     res.json(posts.dataValues);
   });
 });
+module.exports = router;
 
 

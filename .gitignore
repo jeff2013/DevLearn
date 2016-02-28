@@ -4,3 +4,4 @@ node_modules/
 postgres.pub
 private.key
 public.key
+dpsql.sh

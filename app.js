@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var login = require('./routes/login');
 var user_api = require('./routes/user_api');
+var tag_api = require('./routes/tag_api');
 var register = require('./routes/register');
 var express = require('express');
 var busboy = require('connect-busboy');
@@ -37,6 +38,7 @@ app.use('/', routes);
 app.use('/login', login);
 app.use('/register', register);
 app.use('/api/users', user_api);
+app.use('/api/tags', tag_api);
 
 models.sequelize.sync().then(function () {
   console.log('Sequelize initialized!');
