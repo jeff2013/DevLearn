@@ -48,14 +48,10 @@ app.use('/login', login);
 app.use('/register', register);
 app.use('/api/users', user_api);
 app.use('/api/tags', tag_api);
-app.use('/api/posts', post_api);
 app.use('/tags', tag);
 app.use('/posts', posts);
 app.use('/api/search', search);
 app.use('/api/posts', post_api);
-app.use('/tags', tag);
-app.use('/posts', posts);
-app.use('/api/search', search);
 
 const request = require('request')
 

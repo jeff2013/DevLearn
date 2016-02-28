@@ -92,3 +92,18 @@ a {
     max-width:100%;
     max-height: 100%;
 }
+
+.testDiv{
+    margin: 0 auto;
+    width: 100%;
+}
+
+.constraint{
+    width: 300px;
+    height: 300px;
+}
+
+.resize{
+    max-width:100%;
+    max-height: 100%;
+}

@@ -5,14 +5,12 @@ block content
         li(role="presentation" class="active")
             a(href="/") ShitPost.org
         if loggedIn
-
             div.fullsize.bord
                 form(action="/login/logout", method = "get", data-toggle="validator" role = "form", id="registration-form")
                     div.form-group.form-actions.bord
                         button.btn-logout.right.pad.btn(type="submit").
                             Logout
                 a.btn.right(href="/posts/create_post") Create Post
-
         else
             li(role="presentation")
                 a(href="/login") Login
