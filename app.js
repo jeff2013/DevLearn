@@ -12,8 +12,6 @@ var tag_api = require('./routes/tag_api');
 var post_api=require('./routes/post_api');
 var register = require('./routes/register');
 var search = require('./routes/search');
-var tag = require('./routes/tag');
-var posts=require('./routes/post');
 var express = require('express');
 var busboy = require('connect-busboy');
 var passport = require('passport');
@@ -52,6 +50,7 @@ app.use('/api/search', search);
 app.use('/api/posts', post_api);
 app.use('/tags', tag);
 app.use('/posts', posts);
+app.use('/api/search', search);
 
 models.sequelize.sync().then(function () {
   console.log('Sequelize initialized!');
