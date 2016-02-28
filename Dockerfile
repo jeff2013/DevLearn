@@ -1,3 +1,4 @@
-FROM node:4-onbuild
+FROM node:5.7.0-onbuild
 
-EXPOSE 3000
+EXPOSE 80
+
