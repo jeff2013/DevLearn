@@ -3,6 +3,7 @@
  */
 var Model = require("../models");
 var express = require('express');
+var search = require('../logic/search');
 var http = require('http');
 var router = express.Router();
 
@@ -54,12 +55,18 @@ router.post('/new_post', function(req, res) {
         return Promise.all(output);
     }).then(function(tags) {
         var post = tags.shift()
-        console.log("TAGS:", tags);
-        console.log("POST:", post);
         return post.addTags(tags).then(function() {
             return post;
         })
     }).then(function(post){
+		var search_data = Model.SearchData.build({
+			data: JSON.stringify(search.getSearchData(
+				search.getTokens(body.content)))
+		})
+		return search_data.setPost(post).then(function(){
+			return post
+		})
+	}).then(function(post){
         res.json({ result: post.dataValue })
     }).catch(function(err){
         console.error(err);
