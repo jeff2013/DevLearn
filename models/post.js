@@ -10,12 +10,13 @@ module.exports = function (sequelize, DataTypes) {
         // Content is based off of what type it is
         // IE: video would be url to video
         // Or Text would just be text, etc
-        content : DataTypes.STRING
+        content : DataTypes.STRING,
+        popularity : DataTypes.INTEGER
     }, {
         classMethods: {
             associate: function (models) {
-                Post.belongsTo(models.User, { as: 'Posts', foreignKey: 'user_id'});
-                //Post.hasMany(models.Tag, { through: 'PostTags'});
+                Post.belongsTo(models.User, { as: 'Post', foreignKey: 'user_id'});
+                Post.belongsToMany(models.Tags, { through : "PostTags" });
             }
         }
     });

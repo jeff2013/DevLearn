@@ -1,7 +1,7 @@
 /**
  * Created by reed on 2016-02-27.
  */
-var Model = require("../models");
+var Models = require("../models");
 var express = require("express");
 var bcrypt = require("bcryptjs");
 var express = require('express');

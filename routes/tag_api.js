@@ -19,4 +19,18 @@ router.get('/top/:num_tags', function(req, res) {
   });
 });
 
+router.get('/:tag_id/top_posts/:num_posts', function(req, res) {
+  Model.Post.find({
+    include: [{
+      model: Tag,
+      required: true
+    }], where : {
+      tag_id: req.params.tag_id
+    }, order: '"popularity" DESC',
+    limit: req.params.num_posts
+  }).then(function(posts) {
+    res.json(posts.dataValues);
+  });
+});
+
 

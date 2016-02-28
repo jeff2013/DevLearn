@@ -3,12 +3,12 @@
  */
 module.exports = function (sequelize, DataTypes) {
     var Course = sequelize.define('Course', {
-        title : DataTypes.STRING,
+        title : DataTypes.STRING
     }, {
         classMethods: {
             associate: function (models) {
-                Course.HasMany(models.Tag, { through: 'CourseTags' });
-                Course.HasMany(models.Post, { as: 'Posts', foreignKey: 'course_id' });
+                //Course.hasMany(models.Tag, { through: 'CourseTags' });
+                //Course.hasMany(models.Post, { as: 'Post', foreignKey: 'course_id' });
             }
         }
     });
