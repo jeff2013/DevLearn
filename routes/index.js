@@ -12,9 +12,9 @@ router.get('/', function(req, res, next) {
     if(error){
       console.log(error);
     }else{
-      console.log(response);
-      //var json = JSON.parse(response);
-      res.render('index', { title: 'Shitpost'});
+      console.log(response.body);
+      var json = JSON.parse(response.body);
+      res.render('index', { title: 'Shitpost', tags: json});
     }
   })
 });
