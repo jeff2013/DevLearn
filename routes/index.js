@@ -7,7 +7,7 @@ var request = require('request');
 router.get('/', function(req, res, next) {
   console.log(req.get('host'));
   request({
-    url:"http://"+req.get('host')+"/api/tags/top/4",
+    url:"http://"+req.get('host')+"/api/tags/top/40",
     method: 'GET'
   }, function(error, response, body){
     if(error){
