@@ -77,3 +77,14 @@ a {
     height:400px;
     max-width: 100%;
 }
+
+.postsDiv{
+    max-width: 75%;
+    height: auto;
+    margin-left: 50px;
+}
+
+.block{
+    display: inline-block;
+    margin: 10px;
+}

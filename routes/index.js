@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
       console.log(response.body);
       var json = JSON.parse(response.body);
       console.log(req.isAuthenticated());
-      res.render('index', { title: 'Shitpost', tags: json, loggedIn: req.isAuthenticated()});
+      res.render('index', { title: 'DevLearn', tags: json, loggedIn: req.isAuthenticated()});
     }
   })
 });

@@ -26,9 +26,11 @@ router.get('/:tag_id/top_posts/:num_posts', function(req, res) {
         if(error){
             console.log(error);
         }else{
-            console.log(response.body);
+            console.log("BODY" + response.body);
             var json = JSON.parse(response.body);
-            res.render('post_list', { title: 'Shitpost', posts: json, md:md});
+            Model.Tag.findOne({where : {id : req.params.tag_id}}).then(function(tag) {
+                res.render('post_list', { title: tag.title, posts: json, md:md});
+            })
         }
     })
 });
