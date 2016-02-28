@@ -15,9 +15,9 @@ module.exports = function (sequelize, DataTypes) {
         classMethods: {
             associate: function (models) {
                 Post.belongsTo(models.User, { as: 'Posts', foreignKey: 'user_id'});
-                Post.hasMany(models.Tag, { through: 'PostTags'});
+                //Post.hasMany(models.Tag, { through: 'PostTags'});
             }
         }
     });
-    return Course;
+    return Post;
 };

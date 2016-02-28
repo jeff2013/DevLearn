@@ -10,6 +10,9 @@ var router = express.Router();
 var http = require('http');
 
 router.post('/new_user', function(req, res){
+    console.log("POST recieved");
+    console.log(req.body);
+    // Validation logic here
     var body = req.body;
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(body.password, salt);

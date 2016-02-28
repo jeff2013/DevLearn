@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var login = require('./routes/login');
+var user_api = require('./routes/user_api');
 var register = require('./routes/register');
 var express = require('express');
 var busboy = require('connect-busboy');
@@ -35,11 +36,11 @@ app.use(busboy());
 app.use('/', routes);
 app.use('/login', login);
 app.use('/register', register);
+app.use('/api/users', user_api);
 
 models.sequelize.sync().then(function () {
   console.log('Sequelize initialized!');
   startPassport();
-  app.listen(80);
 });
 
 passport.serializeUser(function (username, done) {
@@ -98,19 +99,24 @@ var startPassport = function(){
       "where": {"username": username},
       "attributes": ['username', 'password']
     };
+    //use the else cases because done() is async ffs.
     var validate = function(user){
-      var account = user.dataValues;
-      if(!account) {
-        done(null, false, {message: 'Unknown user'});
-      }
-      bcrypt.compare(password, account.password, function(err, res){
-        if(res){
-          done(null, account.username);
+      if(user == null){
+        done(null, false, {message: "User not found"});
+      }else{
+        var account = user.dataValues;
+        if(!account) {
+          done(null, false, {message: 'Unknown user'});
         }else{
-          done(null, false, {message: "Invalid Password"});
+          bcrypt.compare(password, account.password, function(err, res){
+            if(res){
+              done(null, account.username);
+            }else{
+              done(null, false, {message: "Invalid Password"});
+            }
+          });
         }
-      });
-
+      }
     };
     models.User.findOne(query).then(validate);
   }));
