@@ -11,7 +11,8 @@ module.exports = function (sequelize, DataTypes) {
         // IE: video would be url to video
         // Or Text would just be text, etc
         content : DataTypes.STRING,
-        popularity : DataTypes.INTEGER
+        popularity : DataTypes.INTEGER,
+        image_url : DataTypes.STRING
     }, {
         classMethods: {
             associate: function (models) {
