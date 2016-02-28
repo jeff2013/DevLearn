@@ -5,4 +5,3 @@ postgres.pub
 private.key
 public.key
 dpsql.sh
-credentials.json
