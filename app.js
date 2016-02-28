@@ -7,11 +7,13 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var login = require('./routes/login');
+var register = require('./routes/register');
 var express = require('express');
 var busboy = require('connect-busboy');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcryptjs');
+var models = require('./models');
 
 var app = express();
 
@@ -32,11 +34,12 @@ app.use(busboy());
 
 app.use('/', routes);
 app.use('/login', login);
+app.use('/register', register);
 
-var models = require('./models');
 models.sequelize.sync().then(function () {
   console.log('Sequelize initialized!');
   startPassport();
+  app.listen(80);
 });
 
 passport.serializeUser(function (username, done) {
