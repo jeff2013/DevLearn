@@ -10,7 +10,6 @@ var Sequelize = require('sequelize');
 var basename = path.basename(module.filename);
 var config = require('../credentials.json');
 var db = { "sequelize": "", "Sequelize": "" };
-var models = require('./');
 
 var sequelize = new Sequelize(config.database, config.username, config.password, config);
 

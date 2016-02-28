@@ -10,6 +10,7 @@ module.exports = function (sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function (models) {
+                console.log(models);
                 Comment.belongsTo(models.User, { foreignKey: 'user_id' });
             }
         }

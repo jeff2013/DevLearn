@@ -7,7 +7,8 @@ module.exports = function (sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function (models) {
-                //Course.hasMany(models.Tag, { through: 'CourseTags' });
+                Course.HasMany(models.Tag, { through: 'CourseTags' });
+                Course.HasMany(models.Post, { as: 'Posts', foreignKey: 'course_id' });
             }
         }
     });

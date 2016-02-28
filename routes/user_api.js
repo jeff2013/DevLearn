@@ -16,17 +16,25 @@ router.post('/new_user', function(req, res){
     var body = req.body;
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(body.password, salt);
-    var account = {
-        username: body.username,
-        password: hash,
-        email: body.email
-    };
-    var result = Model.User.create(account);
-    res.json({ "result" : result.dataValues })
+    Model.User.findOrCreate({
+        where: {
+            'username': req.params.username,
+        },
+        defaults: {
+            'password': hash,
+            'email': req.params.email
+        }
+    }).then(function(user, created) {
+        if(created) {
+            res.json({'result': user.dataValues});
+        } else {
+            res.json({ 'result' : "User already exists"});
+        }
+    });
 });
 
 router.get('/:user_id', function(req, res) {
-   Models.Comic.findOne({
+   Models.User.findOne({
        where: {
            user_id: req.params.user_id
        }
