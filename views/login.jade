@@ -2,20 +2,17 @@
    Created by jeffchang on 2016-02-27,
     //extends layout takes the stuff in the header of the layout.jade file and applies it to the current jade file
     //extends layout
-doctype html
-html(lang="en")
-head
-    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet")
-    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js")
+extends layout
 block content
-    h1= title
-    p Welcome to #{title}
+    ul(class="nav nav-tabs")
+        li(role="presentation")
+            a(href="/") ShitPost.org
+        li(role="presentation" class="active")
+            a(href="/login") Login
+        li(role="presentation")
+            a(href="/register") Register
     body
         div.container
-            .row
-                p this is row 1
-            .row
-                p this is row 2
             .row
                 form(action="/login", method = "post")
                     div.form-group
@@ -27,4 +24,7 @@ block content
                     div.form-group
                         button.btn.btn-lg.btn-primary.btn-block(class="btn btn-sm btn-primary", type="submit").
                             Login
-
+            .row
+                form(action='./register')
+                        button.btn.btn-sm.btn-register.btn-block(type="submit").
+                            Register

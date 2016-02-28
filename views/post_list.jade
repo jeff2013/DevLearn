@@ -1,0 +1,31 @@
+//
+   Created by jeffchang on 2016-02-27,
+    //extends layout takes the stuff in the header of the layout.jade file and applies it to the current jade file
+    //extends layout
+extends layout
+block content
+    ul(class="nav nav-tabs")
+        li(role="presentation")
+            a(href="/") Home
+    body
+        .container
+            h3.center Welcome to the shitty posts
+        .container
+            each post in posts
+                .constraint
+                    .card.small(style="overflow: hidden;")
+                        .card-image.waves-effect.waves-block.waves-light
+                            img.activator.resize(src='https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSw46sQTFscSBN7K6CnQftAjnBq3_qv19kiHPRePB5o14R0RCfoWa7WlF0', overflow="hidden")
+                        .card-content
+                            span.card-title.activator.grey-text.text-darken-4=post.title
+                                i.material-icons.right more_vert
+                            p
+                                a(href='#') This is a link
+                        .card-reveal
+                            span.card-title.grey-text.text-darken-4=post.title
+                                i.material-icons.right close
+                            p=post.content
+                            .row
+                                a(href="/posts/get_post/"+post.id)
+                                    button.btn.btn-sm.btn-register.btn-block(type="submit").
+                                        Open full post

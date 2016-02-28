@@ -1,16 +1,29 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  div
-    p Hello World
-    p hi
-  div
-    p bro
-    form(action='./login')
-      input(type='submit', value='Login')
-    form(action='./register')
-      input(type='submit', value='Register')
-
+    ul(class="nav nav-tabs")
+        li(role="presentation" class="active")
+            a(href="/") ShitPost.org
+        if loggedIn
+            div.fullsize.bord
+                form(action="/login/logout", method = "get", data-toggle="validator" role = "form", id="registration-form")
+                    div.form-group.form-actions.bord
+                        button.btn-logout.right.pad.btn(type="submit").
+                            Logout
+                a.btn.right(href="/posts/create_post") Create Post
+        else
+            li(role="presentation")
+                a(href="/login") Login
+            li(role="presentation")
+                a(href="/register") Register
+    h1.center= title
+    p.center Welcome to #{title}
+    .container
+        each tag in tags
+                .testDiv
+                    .col.s12.m6
+                        .card.blue-grey.darken-1
+                            a(href="/tags/"+tag.id+"/top_posts/10")
+                                .card-content.white-text
+                                    span.card-title=tag.title
 
